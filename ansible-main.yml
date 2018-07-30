@@ -1,0 +1,18 @@
+- name: Provision docker services
+  hosts: java-ec2
+  gather_facts: no
+  tasks:
+    - docker_service:
+      project_name: Java"
+      definition:
+        Japp:
+          build: "{{ playbook_dir }}/javahello"
+          volumes:
+            - "{{ playbook_dir }}/javahello/helloworld.war:/app"
+          ports: "8080:8080"
+          command: "java -jar helloworld.war"
+        nginx:
+          build: "{{ playbook_dir }}/nginx"
+          ports: 8080:8080
+          links: 
+            - Japp
