@@ -1,3 +1,5 @@
+#pass from vars file
+
 provider "aws" {
 	shared_credentials_file = "${var.credentials-file}"
 	profile = "${var.profile}"
