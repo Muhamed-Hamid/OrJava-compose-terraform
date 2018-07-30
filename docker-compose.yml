@@ -1,0 +1,17 @@
+version: '2'
+services:
+        OJavApp:
+                build: ./javahello
+                image: java-app-1.0
+                ports: 
+                        - "80:80"
+                        - "8080:8080"
+                
+        
+        nginx:
+                build: ./javahello/nginx
+                image: nginx-1.0
+                ports: "8080:8080"
+                volumes: 
+                        - ./nginx/conf.d:/etc/nginx/conf.d
+                links: OJavApp
